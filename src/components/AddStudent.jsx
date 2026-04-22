@@ -1,0 +1,61 @@
+import { useState } from "react"
+
+function AddStudent({students, setStudents}) {
+
+    const [newStudent,setNewStudent] = useState({
+        id:"",
+        name:"",
+        score:""
+    })
+
+    const handleNameChange = (value,index)=>{
+        setNewStudent(s=>({
+            ...s,
+            id:index+1,
+            name:value
+        }))
+    }
+
+       const handleScoreChange = (value,index)=>{
+        setNewStudent(s=>({
+            ...s,
+            score:value
+        }))
+    }
+
+    const submitStudent = ()=>{
+        setStudents((prev)=>[...prev,newStudent])
+
+        setNewStudent({
+        id:"",
+        name:"",
+        score:""
+        })
+    }
+
+
+  return (
+    <div>
+        <div className="w-200 flex flex-col">
+            <div className="flex justify-between items-center text-[#7C3AED] border-1 border-[#7C3AED] border-b-0 py-3 px-4">
+                <div className="w-35 text-s flex justify-between items-center">
+                <span className="inline-block rounded-full w-3 h-3 bg-[#C084FC]"></span>
+                <h4>Register Student</h4>
+                </div>
+                <span className="text-xs">NEW ENTRY</span>
+            </div>
+
+            <div className="text-[#7C3AED] flex border-0">
+                <input type="text" name="" placeholder="STUDENT NAME" id="" className="flex-1 p-5 border-1 outline-0" value={newStudent.name} onChange={(e)=>handleNameChange(e.target.value)}/>
+                <input type="text" name="" id="" placeholder="SCORE (0-100)"  className="flex-1 p-5 border-1  outline-0" value={newStudent.score} onChange={(e)=>handleScoreChange(e.target.value)}/>
+                <button className="w-30 p-5 border-1 cursor-pointer border-t-[#7C3AED] hover:bg-[#C084FC]" onClick={submitStudent}>+ ADD</button>
+            </div>
+
+
+        </div>
+
+    </div>
+  )
+}
+
+export default AddStudent
